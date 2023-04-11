@@ -23,7 +23,13 @@ export const providerConfig = {
  * @returns {object} All of the values needed for the provider
  */
 export const getGitProvider = (href) => {
+
+  console.log('href', href);
   switch (true) {
+    case /git\.tristanld\.fr/.test(href): {
+      console.log('gitea');
+      return providerConfig.gitea;
+    }
     case /github\.com.*/.test(href):
       return providerConfig.github;
 
@@ -46,7 +52,10 @@ export const getGitProvider = (href) => {
     case /sourceforge\.net/.test(href):
       return providerConfig.sourceforge;
 
-    default:
+    default: {
+      console.log('No provider found');
       return null;
+    }
   }
+
 };
